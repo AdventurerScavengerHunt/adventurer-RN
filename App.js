@@ -11,25 +11,18 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 
 import 'react-native-gesture-handler'
 
-import Login from './javascript/components/login';
-import MapScreen from './javascript/components/map-screen';
-import StartScreen from './javascript/components/start-screen';
-import SignUp from './javascript/components/signup';
-import HuntScreen from './javascript/components/hunts';
+import Login from './client/components/login';
+import MapScreen from './client/components/map-screen';
+import StartScreen from './client/components/start-screen';
+import SignUp from './client/components/signup';
+import HuntScreen from './client/components/hunts';
 
 
 import { Provider } from 'react-redux';
-import store from './javascript/store';
+import store from './client/store';
 
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'SHAKE ME,\n' +
-    'Shake or press menu button for dev menu',
-});
 
 const AppNavigator = createStackNavigator(
   {
