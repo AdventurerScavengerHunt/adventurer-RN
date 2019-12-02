@@ -67,7 +67,7 @@ class MapScreen extends Component {
         this.state.longitude,
         targetLat,
         targetLong
-      ) < 5000;
+      ) < 100;
     let levelsToComplete = this.props.huntLocations.length - this.state.level;
 
     //conditional logic
