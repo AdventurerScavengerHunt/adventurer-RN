@@ -63,6 +63,7 @@ export const styles = StyleSheet.create({
   aboveError: {
     margin: 7
   },
+  buttonRow: {flexDirection: 'row', justifyContent: 'space-evenly'},
   //HEADER STYLES
   header: {
     fontSize: 27,
