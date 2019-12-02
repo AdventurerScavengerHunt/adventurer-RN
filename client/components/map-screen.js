@@ -1,10 +1,7 @@
 import React, {Component} from 'react'
-import {View, Button, Text, SafeAreaView} from 'react-native'
+import {View, Button, Text, SafeAreaView, PermissionsAndroid} from 'react-native'
 import MapView, {Marker} from 'react-native-maps'
-//import * as Permissions from 'expo-permissions'
-//import * as Location from 'expo-location'
 import {connect} from 'react-redux'
-import {PermissionsAndroid} from 'react-native';
 //------------------------------------------------------------------
 import {
   fetchAllHuntLocations,
@@ -19,8 +16,6 @@ let mounted = true
 //determines default zoom for map
 const LATITUDE_DELTA = 0.00922
 const LONGITUDE_DELTA = 0.00421
-//
-let permissionState = 'nada'
 //------------------------------------------------------------------
 class MapScreen extends Component {
   //------------------------------------------------------------------
@@ -39,25 +34,14 @@ class MapScreen extends Component {
       won: false
     }
     this.handleFound = this.handleFound.bind(this)
-   // this.updatePosition = this.updatePosition.bind(this)
+    this.updatePosition = this.updatePosition.bind(this)
     this.backToStart = this.backToStart.bind(this)
     this.requestLocationPermission = this.requestLocationPermission.bind(this)
   }
   //----------------FUNCTIONS--------------------------------------
   async componentDidMount() {
-    console.log('map mounting')
-
+    mounted = true
     this.requestLocationPermission()
-    //-------------------LOCATION PERMISSIONS-------------------------------
-    // const {status} = await Permissions.askAsync(Permissions.LOCATION)
-    // if (status === 'granted') {
-    //   await Location.getCurrentPositionAsync({
-    //     enableHighAccuracy: true
-    //   })
-    // }
-    // //-------SET LOCATION TRACKING------------------------------------------
-    // mounted = true
-    // this.locationTracking = setInterval(this.updatePosition, 2000)
     //-------------------HUNTS---------------------------------------------
     await this.props.fetchHuntLocations(this.props.user.id)
     let initialScore = this.props.huntLocations.filter(
@@ -80,7 +64,7 @@ class MapScreen extends Component {
         this.state.longitude,
         targetLat,
         targetLong
-      ) < 5000
+      ) < 100
     let levelsToComplete = this.props.huntLocations.length - this.state.level
 
     //conditional logic
@@ -109,67 +93,66 @@ class MapScreen extends Component {
   }
   //------------------------------------------------------------------
   async requestLocationPermission() {
+    //-------------------LOCATION PERMISSIONS-------------------------------
     try {
-      permissionState = 'werkin on it'
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
         {
-          title: 'Location Permission',
+          title: 'AdventurAR App Location Permission',
           message:
-            'ScavangAR needs your location to send you on the hunt!',
+            'AdventurAR App needs access to your location to run the scavenger hunts.',
           buttonNeutral: 'Ask Me Later',
           buttonNegative: 'Cancel',
-          buttonPositive: 'OK',
-        },
-      );
-      permissionState = granted
+          buttonPositive: 'OK'
+        }
+      )
+      console.log('Permission status: ', granted)
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        permissionState = 'You can use the location'
-      } 
-      else if(granted == 'NEVER ASK AGAIN'){
-        permissionState = "NEVER ASK AGAIN"
-      }else{
-        permissionState = 'Location permission denied'
+        //-------SET LOCATION TRACKING------------------------------------------
+        this.locationTracking = setInterval(this.updatePosition, 2000)
       }
     } catch (err) {
-      console.warn(err);
-      permissionState = granted
+      console.warn(err)
     }
   }
   //------------------------------------------------------------------
-  // updatePosition() {
-  //   navigator.geolocation.getCurrentPosition(
-  //     position => {
-  //       if (mounted) {
-  //         this.setState({
-  //           latitude: position.coords.latitude,
-  //           longitude: position.coords.longitude
-  //         })
-  //       }
-  //     },
-  //     error => {
-  //       console.log('update position error')
-  //       console.log('error: ', error)
-  //     },
-  //     {enableHighAccuracy: true, timeout: 2000, maximumAge: 0}
-  //   )
-  // }
+  updatePosition() {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        if (mounted) {
+          this.setState({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          })
+        }
+      },
+      error => {
+        console.log('update position error')
+        console.log('error: ', error)
+      },
+      {enableHighAccuracy: true, timeout: 2000, maximumAge: 0}
+    )
+  }
   //------------------------------------------------------------------
   backToStart() {
     this.props.navigate('StartScreen')
   }
   //------------------------------------------------------------------
   componentWillUnmount() {
-    console.log('map unmounting')
     mounted = false
-    //clearInterval(this.locationTracking)
+    clearInterval(this.locationTracking)
   }
   //------------------------------------------------------------------
   render() {
+    let huntMarker = this.props.huntLocations[this.state.score]
     let huntMarkers = this.props.huntLocations
     let userLoc = {
       latitude: this.state.latitude,
       longitude: this.state.longitude
+    }
+    let huntMarkerCoords = {
+      latitude: parseFloat(huntMarker.latitude),
+      longitude: parseFloat(huntMarker.longitude)
     }
     let level = this.state.level
     return (
@@ -180,22 +163,21 @@ class MapScreen extends Component {
             <Marker coordinate={userLoc}>
               <View style={styles.userLocMarker} />
             </Marker>
-            {/* Testing database hunt location markers */}
-            {!huntMarkers
-              ? null
-              : huntMarkers.map(marker => {
-                  const coords = {
-                    latitude: parseFloat(marker.latitude),
-                    longitude: parseFloat(marker.longitude)
-                  }
-                  return (
-                    <Marker key={marker.id} coordinate={coords}>
-                      <View style={styles.huntLocMarker} />
-                    </Marker>
-                  )
-                })}
+            {/* Testing database hunt location marker */}
+            {!huntMarker ||
+            coordDist(
+              userLoc.latitude,
+              userLoc.longitude,
+              huntMarkerCoords.latitude,
+              huntMarkerCoords.longitude
+            ) > 100 ? null : (
+              <Marker key={huntMarker.id} coordinate={huntMarkerCoords}>
+                <View style={styles.huntLocMarker} />
+              </Marker>
+            )}
           </MapView>
         </View>
+        {/* Score block based on level */}
         {huntMarkers[0] && (
           <View style={styles.scoreBlock}>
             <Text style={styles.redBoxText}>Score</Text>
@@ -212,6 +194,7 @@ class MapScreen extends Component {
         {huntMarkers[0] && (
           <View style={styles.textWindow}>
             <Text>{huntMarkers[level].riddle}</Text>
+            {/* TESTING PARAMETERS */}
             <Text>
               TARGET: {huntMarkers[level].latitude} :{' '}
               {huntMarkers[level].longitude}
@@ -224,11 +207,12 @@ class MapScreen extends Component {
               this.state.longitude,
               huntMarkers[level].latitude,
               huntMarkers[level].longitude
-            ) < 5000 ? (
+            ) < 100 ? (
               <Text>Ya found me!</Text>
             ) : (
               <Text>Keep searchin'!</Text>
             )}
+            {/* Button Selections */}
             {this.locationTracking ? (
               <View>
                 <Button
@@ -246,8 +230,7 @@ class MapScreen extends Component {
                 />
               </View>
             ) : (
-              <Text>{permissionState}</Text>
-            
+              <Text>Loading...</Text>
             )}
           </View>
         )}
