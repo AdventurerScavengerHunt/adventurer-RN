@@ -6,23 +6,23 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import React, {Component} from 'react'
+import {Platform, StyleSheet, Text, View} from 'react-native'
 
-import 'react-native-gesture-handler';
+import 'react-native-gesture-handler'
 
-import Login from './client/components/login';
-import MapScreen from './client/components/map-screen';
-import StartScreen from './client/components/start-screen';
-import SignUp from './client/components/signup';
-import HuntScreen from './client/components/hunts';
-import InstructionScreen from './client/components/instructions';
+import Login from './client/components/login'
+import MapScreen from './client/components/map-screen'
+import StartScreen from './client/components/start-screen'
+import SignUp from './client/components/signup'
+import HuntScreen from './client/components/hunts'
+import InstructionScreen from './client/components/instructions'
 
-import { Provider } from 'react-redux';
-import store from './client/store';
+import {Provider} from 'react-redux'
+import store from './client/store'
 
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import {createAppContainer} from 'react-navigation'
+import {createStackNavigator} from 'react-navigation-stack'
 
 const AppNavigator = createStackNavigator(
   {
@@ -31,21 +31,21 @@ const AppNavigator = createStackNavigator(
     StartScreen: StartScreen,
     HuntScreen: HuntScreen,
     MapScreen: MapScreen,
-    InstructionScreen: InstructionScreen,
+    InstructionScreen: InstructionScreen
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Login'
   }
-);
+)
 
-const AppContainer = createAppContainer(AppNavigator);
+const AppContainer = createAppContainer(AppNavigator)
 
 export default function App() {
   return (
     <Provider store={store}>
       <AppContainer />
     </Provider>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -53,6 +53,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    justifyContent: 'center'
+  }
+})
