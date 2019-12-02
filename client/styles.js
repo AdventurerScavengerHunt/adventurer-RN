@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native'
 
 export const styles = StyleSheet.create({
   // MAP SCREEN STYLES
@@ -6,25 +6,25 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   mapStyle: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+    height: Dimensions.get('window').height
   },
   userLocMarker: {
     backgroundColor: 'blue',
     borderColor: 'lightblue',
     borderWidth: 2,
     padding: 3,
-    borderRadius: 100,
+    borderRadius: 100
   },
   huntLocMarker: {
     backgroundColor: 'red',
     borderColor: 'pink',
     borderWidth: 2,
     padding: 5,
-    borderRadius: 50,
+    borderRadius: 50
   },
   scoreBlock: {
     backgroundColor: 'rgba(165, 42, 42, 0.7)',
@@ -33,11 +33,11 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'absolute',
     top: '5%',
-    left: '5%',
+    left: '5%'
   },
   redBoxText: {
     color: 'goldenrod',
-    fontSize: 20,
+    fontSize: 20
   },
   textWindow: {
     backgroundColor: 'white',
@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
     top: '70%',
     padding: 5,
     borderRadius: 20,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   winMessage: {
     backgroundColor: 'rgba(165, 42, 42, 0.7)',
@@ -53,20 +53,22 @@ export const styles = StyleSheet.create({
     top: '30%',
     padding: 20,
     borderRadius: 20,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   //LOGIN SCREEN STYLES
   errorMessageText: {
-    textDecorationColor: 'red',
+    textDecorationColor: 'red'
   },
   aboveError: {
-    margin: 7,
+    margin: 7
   },
   //HEADER STYLES
   header: {
     fontSize: 27,
+    marginBottom: 20,
+    padding: 10
   },
   aboveHeader: {
-    margin: 30,
-  },
-});
+    margin: 30
+  }
+})

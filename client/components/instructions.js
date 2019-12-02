@@ -1,12 +1,11 @@
-import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { styles } from '../styles';
+import React from 'react'
+import {Text, View} from 'react-native'
+import {styles} from '../styles'
 //------------------------------------------------------------------
 const Instructions = () => {
   return (
     <View style={styles.aboveHeader}>
       <Text style={styles.header}>Are you ready to be an adventurAR? </Text>
-      <Text></Text>
       <Text>
         After you start a new game, select which scavenger hunt theme you would
         like. Locations will be preloaded for you to find. Once you walk to each
@@ -15,7 +14,7 @@ const Instructions = () => {
         hunt!
       </Text>
     </View>
-  );
-};
+  )
+}
 
-export default Instructions;
+export default Instructions
