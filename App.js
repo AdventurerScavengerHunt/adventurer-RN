@@ -12,6 +12,11 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 import 'react-native-gesture-handler'
 
 import Login from './javascript/components/login';
+import MapScreen from './javascript/components/map-screen';
+import StartScreen from './javascript/components/start-screen';
+import SignUp from './javascript/components/signup';
+import HuntScreen from './javascript/components/hunts';
+
 
 import { Provider } from 'react-redux';
 import store from './javascript/store';
@@ -26,33 +31,35 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-export default class App extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit entry file App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
-    );
+const AppNavigator = createStackNavigator(
+  {
+    Login: Login,
+    SignUp: SignUp,
+    StartScreen: StartScreen,
+    HuntScreen: HuntScreen,
+    MapScreen: MapScreen,
+  },
+  {
+    initialRouteName: 'Login',
   }
+);
+
+const AppContainer = createAppContainer(AppNavigator);
+
+
+export default function App() {
+  return (
+    <Provider store={store}>
+      <AppContainer />
+    </Provider>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    backgroundColor: '#fff',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+    justifyContent: 'center',
   },
 });

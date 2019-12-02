@@ -10,8 +10,8 @@ class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      email: '',
-      password: '',
+      email: 'clark@clark.com',
+      password: '1234',
       error: false,
     };
     this.submitLogin = this.submitLogin.bind(this);
@@ -21,7 +21,7 @@ class Login extends React.Component {
   async submitLogin() {
     await this.props.login(this.state.email, this.state.password, LOGIN);
     if (this.props.user.id) {
-     // this.props.navigate('StartScreen');
+      this.props.navigate('StartScreen');
     } else {
       this.setState({
         error: true,
@@ -30,7 +30,7 @@ class Login extends React.Component {
   }
   //------------------------------------------------------------------
   signUp() {
-   // this.props.navigate('SignUp');
+    this.props.navigate('SignUp');
   }
   //------------------------------------------------------------------
   render() {
