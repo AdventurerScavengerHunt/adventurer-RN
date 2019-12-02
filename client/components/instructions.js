@@ -16,9 +16,9 @@ const Instructions = () => {
         <Text style={styles.textWindow}>
           After you start a new game, select which scavenger hunt theme you
           would like. Locations will be preloaded for you to find. Once you walk
-          to each location, a button will pop up saying that you have found the
-          target location. Click that button. Find all the locations to win the
-          scavenger hunt!
+          to each location, a treasure chest will pop up. You can click the
+          Found button to get your points. Then, the next location will load.
+          Find all the locations to win the scavenger hunt!
         </Text>
       </View>
     </ImageBackground>
