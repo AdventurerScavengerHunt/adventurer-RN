@@ -1,23 +1,20 @@
 import React from 'react';
-import { Text, TextInput, View, Button, StyleSheet } from 'react-native';
+import { Text, View } from 'react-native';
 //------------------------------------------------------------------
-const Instructions = props => {
+const Instructions = () => {
   return (
     <View style={{ margin: 50 }}>
-      <Text>Instructions</Text>
+      <Text>Are you ready to be an adventurAR? </Text>
+      <Text></Text>
+      <Text>
+        After you start a new game, select which scavenger hunt theme you would
+        like. Locations will be preloaded for you to find. Once you walk to each
+        location, a button will pop up saying that you have found the target
+        location. Click that button. Find all the locations to win the scavenger
+        hunt!
+      </Text>
     </View>
   );
 };
-//------------------------------------------------------------------
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   }
-// });
-//------------------------------------------------------------------
 
 export default Instructions;
