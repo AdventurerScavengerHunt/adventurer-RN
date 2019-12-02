@@ -1,10 +1,9 @@
 import React, {Component} from 'react'
-import {View, Button, Text, SafeAreaView} from 'react-native'
+import {View, Button, Text, SafeAreaView, PermissionsAndroid} from 'react-native'
 import MapView, {Marker} from 'react-native-maps'
 //import * as Permissions from 'expo-permissions'
 //import * as Location from 'expo-location'
 import {connect} from 'react-redux'
-import {PermissionsAndroid} from 'react-native'
 //------------------------------------------------------------------
 import {
   fetchAllHuntLocations,
