@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, TextInput, View, Button, StyleSheet } from 'react-native';
+import { Text, TextInput, View, Button } from 'react-native';
 import { connect } from 'react-redux';
 //------------------------------------------------------------------
 import { auth } from '../store/user';
+import { styles } from '../styles';
 //------------------------------------------------------------------
 const LOGIN = 'login';
 //------------------------------------------------------------------
@@ -35,8 +36,8 @@ class Login extends React.Component {
   //------------------------------------------------------------------
   render() {
     return (
-      <View style={{ margin: 30 }}>
-        <Text style={{ fontSize: 27 }}>LOGIN</Text>
+      <View style={styles.aboveHeader}>
+        <Text style={styles.header}>LOGIN</Text>
         <TextInput
           placeholder="Email"
           onChangeText={text => this.setState({ email: text })}
@@ -50,27 +51,16 @@ class Login extends React.Component {
           value={this.state.password}
           autoCapitalize="none"
         />
-        <View style={{ margin: 7 }} />
-        <Text style={styles.errorMessageText}>{this.state.error ? 'Incorrect email or password' : ''}</Text>
+        <View style={styles.aboveError} />
+        <Text style={styles.errorMessageText}>
+          {this.state.error ? 'Incorrect email or password' : ''}
+        </Text>
         <Button title="Sign Up" onPress={this.signUp} />
         <Button title="Submit" onPress={this.submitLogin} />
       </View>
     );
   }
 }
-//------------------------------------------------------------------
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  errorMessageText: {
-    color: 'red',
-  },
-});
 //------------------------------------------------------------------
 
 const mapStateToProps = (state, ownProps) => {

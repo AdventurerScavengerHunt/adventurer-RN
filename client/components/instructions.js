@@ -1,10 +1,11 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
+import { styles } from '../styles';
 //------------------------------------------------------------------
 const Instructions = () => {
   return (
-    <View style={{ margin: 50 }}>
-      <Text>Are you ready to be an adventurAR? </Text>
+    <View style={styles.aboveHeader}>
+      <Text style={styles.header}>Are you ready to be an adventurAR? </Text>
       <Text></Text>
       <Text>
         After you start a new game, select which scavenger hunt theme you would

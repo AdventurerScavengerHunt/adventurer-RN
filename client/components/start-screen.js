@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Button, StyleSheet } from 'react-native';
+import { View, Button } from 'react-native';
 import { connect } from 'react-redux';
 import { me } from '../store/user';
 import { withNavigationFocus } from 'react-navigation';
+import { styles } from '../styles';
 //------------------------------------------------------------------
 const NEW_GAME = 'NEW_GAME';
 const RESUME_GAME = 'RESUME_GAME';
@@ -54,7 +55,7 @@ class StartScreen extends React.Component {
   //------------------------------------------------------------------
   render() {
     return (
-      <View style={{ margin: 30 }}>
+      <View style={styles.aboveHeader}>
         <View>
           <Button
             title="GAME INSTRUCTIONS"
@@ -80,19 +81,6 @@ class StartScreen extends React.Component {
     );
   }
 }
-//------------------------------------------------------------------
-
-const styles = StyleSheet.create({
-  container: {
-    margin: 100,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  errorMessageText: {
-    textDecorationColor: 'red',
-  },
-});
 
 //------------------------------------------------------------------
 
