@@ -45,7 +45,8 @@ export const styles = StyleSheet.create({
     top: '70%',
     padding: 5,
     borderRadius: 20,
-    alignItems: 'center'
+    alignItems: 'center',
+    margin: 5
   },
   winMessage: {
     backgroundColor: 'rgba(165, 42, 42, 0.7)',
@@ -70,5 +71,12 @@ export const styles = StyleSheet.create({
   },
   aboveHeader: {
     margin: 30
+  },
+  //FORM STYLES
+  form: {
+    backgroundColor: 'white',
+    padding: 10,
+    borderRadius: 20,
+    margin: 10
   }
 })

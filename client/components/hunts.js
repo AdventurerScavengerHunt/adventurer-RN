@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, View, Button} from 'react-native'
+import {Text, View, Button, ImageBackground} from 'react-native'
 import {connect} from 'react-redux'
 //------------------------------------------------------------------
 import {fetchAllHunts} from '../store/hunts'
@@ -26,15 +26,23 @@ class Hunts extends React.Component {
     const hunts = this.props.hunts
     return (
       <View style={styles.aboveHeader}>
-        <Text style={styles.header}>Choose A Scavenger Hunt:</Text>
-        {hunts.map(hunt => (
-          <View key={hunt.id}>
-            <Button
-              title={hunt.name}
-              onPress={() => this.handleSelectedHunt(hunt.id)}
-            />
-          </View>
-        ))}
+        <ImageBackground
+          source={{
+            uri:
+              'https://cdn.vox-cdn.com/thumbor/JrouYZWSJNcepH5ZAhzVdUA7Muw=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/63616039/171109_08_11_37_5DS_0545.0.jpg'
+          }}
+          style={{width: '100%', height: '100%'}}
+        >
+          <Text style={styles.header}>Choose A Scavenger Hunt:</Text>
+          {hunts.map(hunt => (
+            <View key={hunt.id}>
+              <Button
+                title={hunt.name}
+                onPress={() => this.handleSelectedHunt(hunt.id)}
+              />
+            </View>
+          ))}
+        </ImageBackground>
       </View>
     )
   }

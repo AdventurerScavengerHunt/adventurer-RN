@@ -45,25 +45,27 @@ class Login extends React.Component {
           style={{width: '100%', height: '100%'}}
         >
           <Text style={styles.header}>LOGIN</Text>
-          <TextInput
-            placeholder="Email"
-            onChangeText={text => this.setState({email: text})}
-            value={this.state.email}
-            autoCapitalize="none"
-          />
-          <TextInput
-            placeholder="Password"
-            onChangeText={text => this.setState({password: text})}
-            secureTextEntry={true}
-            value={this.state.password}
-            autoCapitalize="none"
-          />
-          <View style={styles.aboveError} />
-          <Text style={styles.errorMessageText}>
-            {this.state.error ? 'Incorrect email or password' : ''}
-          </Text>
-          <Button title="Sign Up" onPress={this.signUp} />
-          <Button title="Submit" onPress={this.submitLogin} />
+          <View style={styles.form}>
+            <TextInput
+              placeholder="Email"
+              onChangeText={text => this.setState({email: text})}
+              value={this.state.email}
+              autoCapitalize="none"
+            />
+            <TextInput
+              placeholder="Password"
+              onChangeText={text => this.setState({password: text})}
+              secureTextEntry={true}
+              value={this.state.password}
+              autoCapitalize="none"
+            />
+            <View style={styles.aboveError} />
+            <Text style={styles.errorMessageText}>
+              {this.state.error ? 'Incorrect email or password' : ''}
+            </Text>
+            <Button title="Sign Up" onPress={this.signUp} />
+            <Button title="Submit" onPress={this.submitLogin} />
+          </View>
         </ImageBackground>
       </View>
     )
