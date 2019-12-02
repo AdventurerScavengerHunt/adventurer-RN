@@ -6,17 +6,17 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import React, { Component } from 'react';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 
-import 'react-native-gesture-handler'
+import 'react-native-gesture-handler';
 
 import Login from './client/components/login';
 import MapScreen from './client/components/map-screen';
 import StartScreen from './client/components/start-screen';
 import SignUp from './client/components/signup';
 import HuntScreen from './client/components/hunts';
-
+import InstructionScreen from './client/components/instructions';
 
 import { Provider } from 'react-redux';
 import store from './client/store';
@@ -31,6 +31,7 @@ const AppNavigator = createStackNavigator(
     StartScreen: StartScreen,
     HuntScreen: HuntScreen,
     MapScreen: MapScreen,
+    InstructionScreen: InstructionScreen,
   },
   {
     initialRouteName: 'Login',
@@ -38,7 +39,6 @@ const AppNavigator = createStackNavigator(
 );
 
 const AppContainer = createAppContainer(AppNavigator);
-
 
 export default function App() {
   return (
