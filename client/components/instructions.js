@@ -15,10 +15,11 @@ const Instructions = () => {
         <Text style={styles.header}>Are you ready to be an adventurAR? </Text>
         <Text style={styles.textWindow}>
           After you start a new game, select which scavenger hunt theme you
-          would like. Locations will be preloaded for you to find. Once you walk
-          to each location, a treasure chest will pop up. You can click the
-          Found button to get your points. Then, the next location will load.
-          Find all the locations to win the scavenger hunt!
+          would like.
+          {'\n'}{'\n'}Locations will be preloaded for you to find.
+          {'\n'}{'\n'}Once you walk to each location, a treasure chest will pop up. Click on the
+          treasure chest to get your points. Then, the next location will load.
+          {'\n'}{'\n'}Find all the locations to win the scavenger hunt!
         </Text>
       </View>
     </ImageBackground>

@@ -23,13 +23,6 @@ export const styles = StyleSheet.create({
     height: 20,
     width: 20
   },
-  huntLocTestMarker: {
-    backgroundColor: 'red',
-    borderColor: 'pink',
-    borderWidth: 2,
-    padding: 5,
-    borderRadius: 50
-  },
   scoreBlock: {
     backgroundColor: 'rgba(165, 42, 42, 0.7)',
     padding: 5,
@@ -44,12 +37,14 @@ export const styles = StyleSheet.create({
     fontSize: 20
   },
   textWindow: {
-    backgroundColor: 'white',
     position: 'absolute',
-    top: '70%',
-    padding: 5,
-    borderRadius: 20,
+    top: '80%',
     alignItems: 'center',
+    backgroundColor: 'rgb(153, 204, 255)',
+    borderColor: 'rgb(0, 102, 255)',
+    padding: 10,
+    borderWidth: 2,
+    borderRadius: 20,
     margin: 5
   },
   winMessage: {
@@ -71,17 +66,30 @@ export const styles = StyleSheet.create({
   //HEADER STYLES
   header: {
     fontSize: 27,
+    fontWeight: 'bold',
     marginBottom: 20,
-    padding: 10
+    padding: 10,
+    alignSelf: 'center',
+    fontFamily: 'monospace',
+    textShadowColor: 'black',
+    textShadowRadius: 1
   },
   aboveHeader: {
     margin: 30
   },
   //FORM STYLES
   form: {
-    backgroundColor: 'white',
+    backgroundColor: 'rgb(153, 204, 255)',
+    borderColor: 'rgb(0, 102, 255)',
     padding: 10,
-    borderRadius: 20,
+    borderWidth: 2,
+    borderRadius: 15,
     margin: 10
+  },
+  formInput: {
+    backgroundColor: 'rgb(230, 242, 255)',
+    borderColor: 'rgb(220,220,220)',
+    borderWidth: 2,
+    borderRadius: 15
   }
 })

@@ -157,10 +157,6 @@ class MapScreen extends Component {
       latitude: this.state.latitude,
       longitude: this.state.longitude
     }
-    let huntMarkerCoords = {
-      latitude: parseFloat(huntMarker.latitude),
-      longitude: parseFloat(huntMarker.longitude)
-    }
     let level = this.state.level
     return (
       <SafeAreaView style={styles.container}>
@@ -175,16 +171,17 @@ class MapScreen extends Component {
             coordDist(
               userLoc.latitude,
               userLoc.longitude,
-              huntMarkerCoords.latitude,
-              huntMarkerCoords.longitude
+              parseFloat(huntMarker.latitude),
+              parseFloat(huntMarker.longitude)
             ) > 500 ? null : (
               <Marker
                 key={huntMarker.id}
-                coordinate={huntMarkerCoords}
+                coordinate={{latitude: parseFloat(huntMarker.latitude), longitude:
+                  parseFloat(huntMarker.longitude)}}
                 onPress={() =>
                   this.handleFound(
-                    huntMarkerCoords.latitude,
-                    huntMarkerCoords.longitude
+                    parseFloat(huntMarker.latitude),
+                    parseFloat(huntMarker.longitude)
                   )
                 }
               >
@@ -217,7 +214,7 @@ class MapScreen extends Component {
           <View style={styles.textWindow}>
             <Text>{huntMarkers[level].riddle}</Text>
             {/* TESTING PARAMETERS */}
-            <Text>
+            {/* <Text>
               TARGET: {huntMarkers[level].latitude} :{' '}
               {huntMarkers[level].longitude}
             </Text>
@@ -232,20 +229,16 @@ class MapScreen extends Component {
             ) < 500 ? (
               <Text>Ya found me!</Text>
             ) : (
-              <Text>Keep searchin'!</Text>
-            )}
-            {/* Button Selections */}
+              <Text>Keep searchin'! I'm {coordDist(
+                this.state.latitude,
+                this.state.longitude,
+                huntMarkers[level].latitude,
+                huntMarkers[level].longitude
+              )} feet away!</Text>
+            )} */}
+            {/* Back Button Selection */}
             {this.locationTracking ? (
               <View>
-                <Button
-                  title="FOUND"
-                  onPress={() =>
-                    this.handleFound(
-                      huntMarkers[level].latitude,
-                      huntMarkers[level].longitude
-                    )
-                  }
-                />
                 <Button
                   title="BACK TO START SCREEN"
                   onPress={() => this.backToStart()}
