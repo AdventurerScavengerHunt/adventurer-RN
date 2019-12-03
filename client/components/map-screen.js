@@ -1,5 +1,11 @@
 import React, {Component} from 'react'
-import {View, Button, Text, SafeAreaView, PermissionsAndroid} from 'react-native'
+import {
+  View,
+  Button,
+  Text,
+  SafeAreaView,
+  PermissionsAndroid
+} from 'react-native'
 import MapView, {Marker} from 'react-native-maps'
 import {connect} from 'react-redux'
 //------------------------------------------------------------------
@@ -171,7 +177,14 @@ class MapScreen extends Component {
               huntMarkerCoords.latitude,
               huntMarkerCoords.longitude
             ) > 100 ? null : (
-              <Marker key={huntMarker.id} coordinate={huntMarkerCoords}>
+              <Marker
+                key={huntMarker.id}
+                coordinate={huntMarkerCoords}
+                image={{
+                  uri:
+                    'http://www.i2clipart.com/cliparts/3/9/a/2/clipart-treasure-chest-39a2.png'
+                }}
+              >
                 <View style={styles.huntLocMarker} />
               </Marker>
             )}

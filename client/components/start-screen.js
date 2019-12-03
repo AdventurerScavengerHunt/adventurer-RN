@@ -1,11 +1,13 @@
 import React from 'react'
-import {View, Button, StyleSheet} from 'react-native'
+import {View, Button, ImageBackground} from 'react-native'
 import {connect} from 'react-redux'
 import {me} from '../store/user'
 import {withNavigationFocus} from 'react-navigation'
+import {styles} from '../styles'
 //------------------------------------------------------------------
 const NEW_GAME = 'NEW_GAME'
 const RESUME_GAME = 'RESUME_GAME'
+const GAME_INSTRUCTIONS = 'GAME_INSTRUCTIONS'
 //------------------------------------------------------------------
 class StartScreen extends React.Component {
   static navigationOptions = {
@@ -46,42 +48,47 @@ class StartScreen extends React.Component {
       this.props.navigate('HuntScreen')
     } else if (inSelection === RESUME_GAME) {
       this.props.navigate('MapScreen')
+    } else if (inSelection === GAME_INSTRUCTIONS) {
+      this.props.navigate('InstructionScreen')
     }
   }
   //------------------------------------------------------------------
   render() {
     return (
-      <View style={{margin: 30}}>
-        <View>
-          <Button
-            title="NEW GAME"
-            onPress={() => this.handleSelection(NEW_GAME)}
-          ></Button>
-        </View>
-        <View>
-          <Button
-            disabled={this.state.hasNoPreviousGame}
-            title="RESUME"
-            onPress={() => this.handleSelection(RESUME_GAME)}
-          ></Button>
-        </View>
+      <View style={styles.aboveHeader}>
+        <ImageBackground
+          source={{
+            uri:
+              'https://cdn.vox-cdn.com/thumbor/JrouYZWSJNcepH5ZAhzVdUA7Muw=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/63616039/171109_08_11_37_5DS_0545.0.jpg'
+          }}
+          style={{width: '100%', height: '100%'}}
+        >
+          <View>
+            <Button
+              title="GAME INSTRUCTIONS"
+              onPress={() => this.handleSelection(GAME_INSTRUCTIONS)}
+            />
+          </View>
+          <View>
+            <Button
+              color="#add8e6"
+              title="NEW GAME"
+              onPress={() => this.handleSelection(NEW_GAME)}
+            />
+          </View>
+          <View>
+            <Button
+              color="#add8e6"
+              disabled={this.state.hasNoPreviousGame}
+              title="RESUME"
+              onPress={() => this.handleSelection(RESUME_GAME)}
+            />
+          </View>
+        </ImageBackground>
       </View>
     )
   }
 }
-//------------------------------------------------------------------
-
-const styles = StyleSheet.create({
-  container: {
-    margin: 100,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  errorMessageText: {
-    textDecorationColor: 'red'
-  }
-})
 
 //------------------------------------------------------------------
 

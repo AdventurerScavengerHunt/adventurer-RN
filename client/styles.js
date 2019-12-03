@@ -1,6 +1,7 @@
 import {Dimensions, StyleSheet} from 'react-native'
 
 export const styles = StyleSheet.create({
+  // MAP SCREEN STYLES
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -44,7 +45,8 @@ export const styles = StyleSheet.create({
     top: '70%',
     padding: 5,
     borderRadius: 20,
-    alignItems: 'center'
+    alignItems: 'center',
+    margin: 5
   },
   winMessage: {
     backgroundColor: 'rgba(165, 42, 42, 0.7)',
@@ -53,5 +55,29 @@ export const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 20,
     alignItems: 'center'
+  },
+  //LOGIN SCREEN STYLES
+  errorMessageText: {
+    textDecorationColor: 'red'
+  },
+  aboveError: {
+    margin: 7
+  },
+  buttonRow: {flexDirection: 'row', justifyContent: 'space-evenly'},
+  //HEADER STYLES
+  header: {
+    fontSize: 27,
+    marginBottom: 20,
+    padding: 10
+  },
+  aboveHeader: {
+    margin: 30
+  },
+  //FORM STYLES
+  form: {
+    backgroundColor: 'white',
+    padding: 10,
+    borderRadius: 20,
+    margin: 10
   }
 })

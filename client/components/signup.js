@@ -1,7 +1,8 @@
 import React from 'react'
-import {Text, TextInput, View, Button, StyleSheet} from 'react-native'
+import {Text, TextInput, View, Button, ImageBackground} from 'react-native'
 import {connect} from 'react-redux'
 import {auth} from '../store/user'
+import {styles} from '../styles'
 
 const SIGNUP = 'signup'
 
@@ -55,57 +56,57 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <View style={{margin: 30}}>
-        <Text style={{fontSize: 27}}>SIGNUP</Text>
-        <TextInput
-          placeholder="Username"
-          onChangeText={text => this.setState({username: text})}
-          value={this.state.username}
-          autoCapitalize="none"
-        />
-        <TextInput
-          placeholder="Email"
-          onChangeText={text => this.setState({email: text})}
-          value={this.state.email}
-          autoCapitalize="none"
-        />
-        <TextInput
-          placeholder="Password"
-          onChangeText={text => this.setState({password: text})}
-          secureTextEntry={true}
-          value={this.state.password}
-          autoCapitalize="none"
-        />
-        <TextInput
-          placeholder="Confirm Password"
-          onChangeText={text => this.setState({confirmPassword: text})}
-          secureTextEntry={true}
-          value={this.state.confirmPassword}
-          autoCapitalize="none"
-        />
-        <View style={{margin: 7}} />
-        {this.state.errorMessage ? (
-          <Text style={styles.errorMessageText}>{this.state.errorMessage}</Text>
-        ) : (
-          <Text />
-        )}
-        <Button title="Create Account" onPress={this.createAccount} />
+      <View style={styles.aboveHeader}>
+        <ImageBackground
+          source={{
+            uri:
+              'https://cdn.vox-cdn.com/thumbor/JrouYZWSJNcepH5ZAhzVdUA7Muw=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/63616039/171109_08_11_37_5DS_0545.0.jpg'
+          }}
+          style={{width: '100%', height: '100%'}}
+        >
+          <Text style={styles.header}>SIGNUP</Text>
+          <View style={styles.form}>
+            <TextInput
+              placeholder="Username"
+              onChangeText={text => this.setState({username: text})}
+              value={this.state.username}
+              autoCapitalize="none"
+            />
+            <TextInput
+              placeholder="Email"
+              onChangeText={text => this.setState({email: text})}
+              value={this.state.email}
+              autoCapitalize="none"
+            />
+            <TextInput
+              placeholder="Password"
+              onChangeText={text => this.setState({password: text})}
+              secureTextEntry={true}
+              value={this.state.password}
+              autoCapitalize="none"
+            />
+            <TextInput
+              placeholder="Confirm Password"
+              onChangeText={text => this.setState({confirmPassword: text})}
+              secureTextEntry={true}
+              value={this.state.confirmPassword}
+              autoCapitalize="none"
+            />
+            <View style={styles.aboveError} />
+            {this.state.errorMessage ? (
+              <Text style={styles.errorMessageText}>
+                {this.state.errorMessage}
+              </Text>
+            ) : (
+              <Text />
+            )}
+            <Button title="Create Account" onPress={this.createAccount} />
+          </View>
+        </ImageBackground>
       </View>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  errorMessageText: {
-    color: 'red'
-  }
-})
 
 const mapStateToProps = (state, ownProps) => {
   return {
