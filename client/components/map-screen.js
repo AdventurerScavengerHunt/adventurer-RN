@@ -23,6 +23,8 @@ let mounted = true
 //determines default zoom for map
 const LATITUDE_DELTA = 0.00922
 const LONGITUDE_DELTA = 0.00421
+//sets minimum distance user needs to be from hunt location marker
+let minDist = 500
 //------------------------------------------------------------------
 class MapScreen extends Component {
   //------------------------------------------------------------------
@@ -71,7 +73,7 @@ class MapScreen extends Component {
         this.state.longitude,
         targetLat,
         targetLong
-      ) < 500
+      ) < minDist
     let levelsToComplete = this.props.huntLocations.length - this.state.level
 
     //conditional logic
@@ -173,7 +175,7 @@ class MapScreen extends Component {
               userLoc.longitude,
               parseFloat(huntMarker.latitude),
               parseFloat(huntMarker.longitude)
-            ) > 500 ? null : (
+            ) > minDist ? null : (
               <Marker
                 key={huntMarker.id}
                 coordinate={{latitude: parseFloat(huntMarker.latitude), longitude:
@@ -226,7 +228,7 @@ class MapScreen extends Component {
               this.state.longitude,
               huntMarkers[level].latitude,
               huntMarkers[level].longitude
-            ) < 500 ? (
+            ) < minDist ? (
               <Text>Ya found me!</Text>
             ) : (
               <Text>Keep searchin'! I'm {coordDist(
