@@ -4,7 +4,8 @@ import {
   Button,
   Text,
   SafeAreaView,
-  PermissionsAndroid
+  PermissionsAndroid,
+  Image
 } from 'react-native'
 import MapView, {Marker} from 'react-native-maps'
 import {connect} from 'react-redux'
@@ -70,7 +71,7 @@ class MapScreen extends Component {
         this.state.longitude,
         targetLat,
         targetLong
-      ) < 100
+      ) < 500
     let levelsToComplete = this.props.huntLocations.length - this.state.level
 
     //conditional logic
@@ -169,23 +170,31 @@ class MapScreen extends Component {
             <Marker coordinate={userLoc}>
               <View style={styles.userLocMarker} />
             </Marker>
-            {/* Testing database hunt location marker */}
+            {/* Database hunt location marker */}
             {!huntMarker ||
             coordDist(
               userLoc.latitude,
               userLoc.longitude,
               huntMarkerCoords.latitude,
               huntMarkerCoords.longitude
-            ) > 100 ? null : (
+            ) > 500 ? null : (
               <Marker
                 key={huntMarker.id}
                 coordinate={huntMarkerCoords}
-                image={{
-                  uri:
-                    'http://www.i2clipart.com/cliparts/3/9/a/2/clipart-treasure-chest-39a2.png'
-                }}
+                onPress={() =>
+                  this.handleFound(
+                    huntMarkerCoords.latitude,
+                    huntMarkerCoords.longitude
+                  )
+                }
               >
-                <View style={styles.huntLocMarker} />
+                <Image
+                  source={{
+                    uri:
+                      'http://www.i2clipart.com/cliparts/3/9/a/2/clipart-treasure-chest-39a2.png'
+                  }}
+                  style={styles.huntLocMarker}
+                />
               </Marker>
             )}
           </MapView>
@@ -220,7 +229,7 @@ class MapScreen extends Component {
               this.state.longitude,
               huntMarkers[level].latitude,
               huntMarkers[level].longitude
-            ) < 100 ? (
+            ) < 500 ? (
               <Text>Ya found me!</Text>
             ) : (
               <Text>Keep searchin'!</Text>

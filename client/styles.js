@@ -20,6 +20,10 @@ export const styles = StyleSheet.create({
     borderRadius: 100
   },
   huntLocMarker: {
+    height: 20,
+    width: 20
+  },
+  huntLocTestMarker: {
     backgroundColor: 'red',
     borderColor: 'pink',
     borderWidth: 2,
