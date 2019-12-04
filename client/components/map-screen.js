@@ -3,13 +3,12 @@ import {
   View,
   Button,
   Text,
-  SafeAreaView,
   PermissionsAndroid,
   TouchableHighlight,
   Image
 } from 'react-native'
-import MapView, {Marker} from 'react-native-maps'
 import {connect} from 'react-redux'
+import Geolocation from 'react-native-geolocation-service'
 //------------------------------------------------------------------
 import {
   fetchAllHuntLocations,
@@ -130,7 +129,7 @@ class MapScreen extends Component {
   }
   //------------------------------------------------------------------
   updatePosition() {
-    navigator.geolocation.getCurrentPosition(
+    Geolocation.getCurrentPosition(
       position => {
         if (mounted) {
           this.setState({
@@ -200,7 +199,6 @@ class MapScreen extends Component {
                 style={styles.huntLocMarker}
               />
             </TouchableHighlight>
-            <Text>Ya found me!</Text>
           </View>
         )}
         {this.state.won && (

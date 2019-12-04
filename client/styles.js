@@ -21,13 +21,12 @@ export const styles = StyleSheet.create({
     borderRadius: 100
   },
   huntLocMarker: {
-    height: 40,
-    width: 40
+    height: 120,
+    width: 120
   },
   treasureImageView: {
-    backgroundColor: 'rgba(165, 42, 42, 0.7)',
     top: Dimensions.get('window').height / 3,
-    left: Dimensions.get('window').width / 4,
+    left: Dimensions.get('window').width / 3,
     position: 'absolute'
   },
   scoreBlock: {
