@@ -75,7 +75,7 @@ export const styles = StyleSheet.create({
   },
   //LOGIN SCREEN STYLES
   errorMessageText: {
-    textDecorationColor: 'red'
+    color: 'red'
   },
   aboveError: {
     margin: 7
