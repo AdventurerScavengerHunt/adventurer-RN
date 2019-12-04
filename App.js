@@ -24,13 +24,6 @@ import store from './client/store'
 import {createAppContainer} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
 
-//VIRO
-import {ViroARSceneNavigator} from 'react-viro'
-import InitialARScene from './client/components/HelloWorldSceneAR'
-let ARScene = () => {
-  return <ViroARSceneNavigator initialScene={{scene: InitialARScene}} />
-}
-
 const AppNavigator = createStackNavigator(
   {
     Login: Login,
@@ -39,7 +32,6 @@ const AppNavigator = createStackNavigator(
     HuntScreen: HuntScreen,
     MapScreen: MapScreen,
     InstructionScreen: InstructionScreen
-    // ARScene: ARScene
   },
   {
     initialRouteName: 'Login'

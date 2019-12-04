@@ -27,7 +27,7 @@ const LONGITUDE_DELTA = 0.00421
 let minDist = 500
 //VIRO
 import {ViroARSceneNavigator} from 'react-viro'
-import InitialARScene from './HelloWorldSceneAR'
+import InitialARScene from './AR-screen'
 //------------------------------------------------------------------
 class MapScreen extends Component {
   //------------------------------------------------------------------
