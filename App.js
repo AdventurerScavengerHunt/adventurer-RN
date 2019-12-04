@@ -38,11 +38,11 @@ const AppNavigator = createStackNavigator(
     StartScreen: StartScreen,
     HuntScreen: HuntScreen,
     MapScreen: MapScreen,
-    InstructionScreen: InstructionScreen,
-    ARScene: ARScene
+    InstructionScreen: InstructionScreen
+    // ARScene: ARScene
   },
   {
-    initialRouteName: 'ARScene'
+    initialRouteName: 'Login'
   }
 )
 
