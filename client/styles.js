@@ -10,7 +10,8 @@ export const styles = StyleSheet.create({
   },
   mapStyle: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height
+    height: Dimensions.get('window').height,
+    position: 'absolute'
   },
   userLocMarker: {
     backgroundColor: 'blue',
@@ -20,17 +21,22 @@ export const styles = StyleSheet.create({
     borderRadius: 100
   },
   huntLocMarker: {
-    height: 20,
-    width: 20
+    height: 120,
+    width: 120
+  },
+  treasureImageView: {
+    top: Dimensions.get('window').height / 3,
+    left: Dimensions.get('window').width / 3,
+    position: 'absolute'
   },
   scoreBlock: {
     backgroundColor: 'rgba(165, 42, 42, 0.7)',
-    padding: 5,
     borderRadius: 20,
+    padding: 5,
     alignItems: 'center',
     position: 'absolute',
-    top: '5%',
-    left: '5%'
+    top: Dimensions.get('window').height / 20,
+    left: Dimensions.get('window').height / 20
   },
   redBoxText: {
     color: 'goldenrod',
@@ -47,10 +53,22 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     margin: 5
   },
+  riddleWindow: {
+    position: 'absolute',
+    top: Dimensions.get('window').height / 1.5,
+    left: Dimensions.get('window').width / 4,
+    alignItems: 'center',
+    backgroundColor: 'rgb(153, 204, 255)',
+    borderColor: 'rgb(0, 102, 255)',
+    padding: 10,
+    borderWidth: 2,
+    borderRadius: 20
+  },
   winMessage: {
     backgroundColor: 'rgba(165, 42, 42, 0.7)',
     position: 'absolute',
-    top: '30%',
+    top: Dimensions.get('window').height / 3,
+    left: Dimensions.get('window').width / 4,
     padding: 20,
     borderRadius: 20,
     alignItems: 'center'

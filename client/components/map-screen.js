@@ -3,12 +3,12 @@ import {
   View,
   Button,
   Text,
-  SafeAreaView,
   PermissionsAndroid,
+  TouchableHighlight,
   Image
 } from 'react-native'
-import MapView, {Marker} from 'react-native-maps'
 import {connect} from 'react-redux'
+import Geolocation from 'react-native-geolocation-service'
 //------------------------------------------------------------------
 import {
   fetchAllHuntLocations,
@@ -25,6 +25,9 @@ const LATITUDE_DELTA = 0.00922
 const LONGITUDE_DELTA = 0.00421
 //sets minimum distance user needs to be from hunt location marker
 let minDist = 500
+//VIRO
+import {ViroARSceneNavigator} from 'react-viro'
+import InitialARScene from './AR-screen'
 //------------------------------------------------------------------
 class MapScreen extends Component {
   //------------------------------------------------------------------
@@ -126,7 +129,7 @@ class MapScreen extends Component {
   }
   //------------------------------------------------------------------
   updatePosition() {
-    navigator.geolocation.getCurrentPosition(
+    Geolocation.getCurrentPosition(
       position => {
         if (mounted) {
           this.setState({
@@ -153,51 +156,16 @@ class MapScreen extends Component {
   }
   //------------------------------------------------------------------
   render() {
-    let huntMarker = this.props.huntLocations[this.state.score]
     let huntMarkers = this.props.huntLocations
     let userLoc = {
       latitude: this.state.latitude,
       longitude: this.state.longitude
     }
     let level = this.state.level
+    let huntMarker = this.props.huntLocations[level]
     return (
-      <SafeAreaView style={styles.container}>
-        <View style={{flex: 1}}>
-          <MapView style={styles.mapStyle} region={this.state}>
-            {/* Current user location marker */}
-            <Marker coordinate={userLoc}>
-              <View style={styles.userLocMarker} />
-            </Marker>
-            {/* Database hunt location marker */}
-            {!huntMarker ||
-            coordDist(
-              userLoc.latitude,
-              userLoc.longitude,
-              parseFloat(huntMarker.latitude),
-              parseFloat(huntMarker.longitude)
-            ) > minDist ? null : (
-              <Marker
-                key={huntMarker.id}
-                coordinate={{latitude: parseFloat(huntMarker.latitude), longitude:
-                  parseFloat(huntMarker.longitude)}}
-                onPress={() =>
-                  this.handleFound(
-                    parseFloat(huntMarker.latitude),
-                    parseFloat(huntMarker.longitude)
-                  )
-                }
-              >
-                <Image
-                  source={{
-                    uri:
-                      'http://www.i2clipart.com/cliparts/3/9/a/2/clipart-treasure-chest-39a2.png'
-                  }}
-                  style={styles.huntLocMarker}
-                />
-              </Marker>
-            )}
-          </MapView>
-        </View>
+      <View style={{flex: 1}}>
+        <ViroARSceneNavigator initialScene={{scene: InitialARScene}} />
         {/* Score block based on level */}
         {huntMarkers[0] && (
           <View style={styles.scoreBlock}>
@@ -207,37 +175,40 @@ class MapScreen extends Component {
             </Text>
           </View>
         )}
+        {!huntMarker ||
+        coordDist(
+          userLoc.latitude,
+          userLoc.longitude,
+          parseFloat(huntMarker.latitude),
+          parseFloat(huntMarker.longitude)
+        ) > minDist ? null : (
+          <View style={styles.treasureImageView}>
+            <TouchableHighlight
+              onPress={() =>
+                this.handleFound(
+                  parseFloat(huntMarker.latitude),
+                  parseFloat(huntMarker.longitude)
+                )
+              }
+            >
+              <Image
+                source={{
+                  uri:
+                    'http://www.i2clipart.com/cliparts/3/9/a/2/clipart-treasure-chest-39a2.png'
+                }}
+                style={styles.huntLocMarker}
+              />
+            </TouchableHighlight>
+          </View>
+        )}
         {this.state.won && (
           <View style={styles.winMessage}>
             <Text style={styles.redBoxText}>YOU WIN!!!!!!!!!</Text>
           </View>
         )}
         {huntMarkers[0] && (
-          <View style={styles.textWindow}>
+          <View style={styles.riddleWindow}>
             <Text>{huntMarkers[level].riddle}</Text>
-            {/* TESTING PARAMETERS */}
-            {/* <Text>
-              TARGET: {huntMarkers[level].latitude} :{' '}
-              {huntMarkers[level].longitude}
-            </Text>
-            <Text>
-              CURR: {this.state.latitude} : {this.state.longitude}
-            </Text>
-            {coordDist(
-              this.state.latitude,
-              this.state.longitude,
-              huntMarkers[level].latitude,
-              huntMarkers[level].longitude
-            ) < minDist ? (
-              <Text>Ya found me!</Text>
-            ) : (
-              <Text>Keep searchin'! I'm {coordDist(
-                this.state.latitude,
-                this.state.longitude,
-                huntMarkers[level].latitude,
-                huntMarkers[level].longitude
-              )} feet away!</Text>
-            )} */}
             {/* Back Button Selection */}
             {this.locationTracking ? (
               <View>
@@ -251,7 +222,7 @@ class MapScreen extends Component {
             )}
           </View>
         )}
-      </SafeAreaView>
+      </View>
     )
   }
 }

@@ -1,5 +1,7 @@
 package com.adventurarclient;
 
+import com.viromedia.bridge.ReactViroPackage;
+
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
@@ -15,6 +17,8 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
+import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -27,10 +31,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+          new ReactViroPackage(ReactViroPackage.ViroPlatform.GVR),
             new MapsPackage(),
             new RNScreensPackage(),
             new RNGestureHandlerPackage(),
-            new ReanimatedPackage()
+            new ReanimatedPackage(),
+            new RNFusedLocationPackage()
       );
     }
 
