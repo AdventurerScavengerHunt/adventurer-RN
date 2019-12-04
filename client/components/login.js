@@ -79,16 +79,8 @@ class Login extends React.Component {
             {this.state.error ? 'Incorrect email or password' : ''}
           </Text>
           <View style={styles.buttonRow}>
-            <Button
-              styles={{padding: 10}}
-              title="Sign Up"
-              onPress={this.signUp}
-            />
-            <Button
-              styles={{padding: 10}}
-              title="Login"
-              onPress={this.submitLogin}
-            />
+            <Button title="Sign Up " onPress={this.signUp} />
+            <Button title="Login " onPress={this.submitLogin} />
           </View>
         </View>
       </ImageBackground>
