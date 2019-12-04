@@ -209,13 +209,6 @@ class MapScreen extends Component {
         {huntMarkers[0] && (
           <View style={styles.riddleWindow}>
             <Text>{huntMarkers[level].riddle}</Text>
-            <Text>
-              TARGET: {huntMarkers[level].latitude} :{' '}
-              {huntMarkers[level].longitude}
-            </Text>
-            <Text>
-              CURR: {this.state.latitude} : {this.state.longitude}
-            </Text>
             {/* Back Button Selection */}
             {this.locationTracking ? (
               <View>
