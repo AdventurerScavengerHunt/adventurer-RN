@@ -18,8 +18,8 @@ class Login extends React.Component {
   constructor() {
     super()
     this.state = {
-      email: 'clark@clark.com',
-      password: '1234',
+      email: '',
+      password: '',
       error: false
     }
     this.submitLogin = this.submitLogin.bind(this)
