@@ -6,13 +6,14 @@
  * @flow
  */
 
-import React, {Component} from 'react'
-import {Platform, StyleSheet, Text, View} from 'react-native'
+import React from 'react'
 
 import 'react-native-gesture-handler'
 
 import Login from './client/components/login'
-import MapScreen from './client/components/map-screen'
+import GameScreen from './client/components/game-screen'
+import ARViewScreen from './client/components/AR-view-screen'
+import MapViewScreen from './client/components/map-view-screen'
 import StartScreen from './client/components/start-screen'
 import SignUp from './client/components/signup'
 import HuntScreen from './client/components/hunts'
@@ -24,13 +25,17 @@ import store from './client/store'
 import {createAppContainer} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
 
+console.disableYellowBox = true
+
 const AppNavigator = createStackNavigator(
   {
     Login: Login,
     SignUp: SignUp,
     StartScreen: StartScreen,
     HuntScreen: HuntScreen,
-    MapScreen: MapScreen,
+    GameScreen: GameScreen,
+    ARViewScreen: ARViewScreen,
+    MapViewScreen: MapViewScreen,
     InstructionScreen: InstructionScreen
   },
   {
@@ -47,12 +52,3 @@ export default function App() {
     </Provider>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-})

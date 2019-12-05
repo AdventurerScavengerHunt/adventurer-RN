@@ -14,11 +14,10 @@ const Instructions = () => {
       <View style={styles.aboveHeader}>
         <Text style={styles.header}>Are you ready to be an adventurAR? </Text>
         <Text style={styles.textWindow}>
-          After you start a new game, select which scavenger hunt theme you
-          would like.
-          {'\n'}{'\n'}Locations will be preloaded for you to find.
-          {'\n'}{'\n'}Once you walk to each location, a treasure chest will pop up. Click on the
-          treasure chest to get your points. Then, the next location will load.
+          After you start a new game, select which scavenger hunt theme you would like.
+          {'\n'}{'\n'}Locations with riddles to follow will be preloaded for you to find.
+          {'\n'}{'\n'}Switch between AR View and Map View to help you track down the next location.
+          {'\n'}{'\n'}When you walk towards each location, a treasure chest will pop up. Once you're close enough, click on the treasure chest to get your points!
           {'\n'}{'\n'}Find all the locations to win the scavenger hunt!
         </Text>
       </View>

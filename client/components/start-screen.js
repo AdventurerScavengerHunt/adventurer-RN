@@ -47,7 +47,7 @@ class StartScreen extends React.Component {
     if (inSelection === NEW_GAME) {
       this.props.navigate('HuntScreen')
     } else if (inSelection === RESUME_GAME) {
-      this.props.navigate('MapScreen')
+      this.props.navigate('GameScreen')
     } else if (inSelection === GAME_INSTRUCTIONS) {
       this.props.navigate('InstructionScreen')
     }
