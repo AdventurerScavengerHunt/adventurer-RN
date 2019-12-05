@@ -15,6 +15,7 @@ import {
   fetchVisitedHuntLocation,
   fetchDroppingHuntLocations
 } from '../store/huntLocations'
+import {toggleObject} from '../store/arScreen'
 import {coordDist} from '../../coordinate-logic'
 import {styles} from '../styles'
 //------------------------------------------------------------------
@@ -43,7 +44,7 @@ class MapScreen extends Component {
       longitudeDelta: LONGITUDE_DELTA,
       level: 0,
       score: 0,
-      won: false
+      won: false,
     }
     this.handleFound = this.handleFound.bind(this)
     this.updatePosition = this.updatePosition.bind(this)
@@ -68,6 +69,9 @@ class MapScreen extends Component {
   //------------------------------------------------------------------
   async handleFound(targetLat, targetLong) {
     //variable declarations
+    console.log("IN HANDLE FOUND")
+    console.log("LAT: ",targetLat)    
+    console.log("LONG: ",targetLong)
     let huntLocs = this.props.huntLocations
     let huntLocId = huntLocs[this.state.level].huntLocation.locationId
     let withinDistance =
@@ -101,6 +105,7 @@ class MapScreen extends Component {
           this.props.navigate('StartScreen')
         }, 4000)
       }
+      this.props.toggleObject(false)
     }
   }
   //------------------------------------------------------------------
@@ -136,10 +141,20 @@ class MapScreen extends Component {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
           })
+          if (
+            !this.state.won &&
+            coordDist(
+              this.state.latitude,
+              this.state.longitude,
+              parseFloat(this.props.huntLocations[this.state.level].latitude),
+              parseFloat(this.props.huntLocations[this.state.level].longitude)
+            ) < minDist
+          ) {
+            this.props.toggleObject(true)
+          }
         }
       },
       error => {
-        console.log('update position error')
         console.log('error: ', error)
       },
       {enableHighAccuracy: true, timeout: 2000, maximumAge: 0}
@@ -165,7 +180,14 @@ class MapScreen extends Component {
     let huntMarker = this.props.huntLocations[level]
     return (
       <View style={{flex: 1}}>
-        <ViroARSceneNavigator initialScene={{scene: InitialARScene}} />
+        <ViroARSceneNavigator
+          initialScene={{
+            scene: InitialARScene,
+            passProps: {
+              handleFound: this.handleFound,
+            }
+          }}
+        />
         {/* Score block based on level */}
         {huntMarkers[0] && (
           <View style={styles.scoreBlock}>
@@ -175,7 +197,7 @@ class MapScreen extends Component {
             </Text>
           </View>
         )}
-        {!huntMarker ||
+        {/* {!huntMarker ||
         coordDist(
           userLoc.latitude,
           userLoc.longitude,
@@ -200,7 +222,7 @@ class MapScreen extends Component {
               />
             </TouchableHighlight>
           </View>
-        )}
+        )} */}
         {this.state.won && (
           <View style={styles.winMessage}>
             <Text style={styles.redBoxText}>YOU WIN!!!!!!!!!</Text>
@@ -231,12 +253,14 @@ const mapStateToProps = (state, ownProps) => {
   return {
     huntLocations: state.huntLocations,
     user: state.user,
-    navigate: ownProps.navigation.navigate
+    navigate: ownProps.navigation.navigate,
+    arScreen: state.arScreen
   }
 }
 //------------------------------------------------------------------
 const mapDispatchToProps = dispatch => {
   return {
+    toggleObject: (showObjectState) => dispatch(toggleObject(showObjectState)),
     fetchHuntLocations: userId => dispatch(fetchAllHuntLocations(userId)),
     fetchVisitLocation: (userId, locationId) =>
       dispatch(fetchVisitedHuntLocation(userId, locationId)),

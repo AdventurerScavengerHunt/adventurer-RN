@@ -5,8 +5,9 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import hunts from './hunts'
 import huntLocations from './huntLocations'
+import arScreen from './arScreen'
 
-const reducer = combineReducers({user, hunts, huntLocations})
+const reducer = combineReducers({user, hunts, huntLocations, arScreen})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
