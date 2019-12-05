@@ -81,6 +81,11 @@ export const styles = StyleSheet.create({
     margin: 7
   },
   buttonRow: {flexDirection: 'row', justifyContent: 'space-evenly'},
+  signUpText: {
+    color: 'gray',
+    textAlign: 'center',
+    textAlignVertical: 'center'
+  },
   //HEADER STYLES
   header: {
     fontSize: 27,
