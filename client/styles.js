@@ -27,9 +27,11 @@ export const styles = StyleSheet.create({
   huntLocMarkerARFound: {
     height: 120,
     width: 120,
-    backgroundColor: 'goldenrod',
-    borderRadius: 20,
-    padding: 2
+    backgroundColor: 'rgba(218,165,32,0.7)',
+    borderColor: 'rgba(218,165,32,0.7)',
+    borderStyle: 'dashed',
+    borderWidth: 2,
+    borderRadius: 100
   },
   huntLocMarkerMap: {
     height: 20,
@@ -38,9 +40,11 @@ export const styles = StyleSheet.create({
   huntLocMarkerMapFound: {
     height: 20,
     width: 20,
-    backgroundColor: 'goldenrod',
-    borderRadius: 20,
-    padding: 2
+    backgroundColor: 'rgba(218,165,32,0.7)',
+    borderColor: 'rgba(218,165,32,0.7)',
+    borderStyle: 'dashed',
+    borderWidth: 2,
+    borderRadius: 100
   },
   treasureImageView: {
     top: Dimensions.get('window').height / 3,
