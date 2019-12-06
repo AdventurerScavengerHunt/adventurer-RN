@@ -12,8 +12,6 @@ import 'react-native-gesture-handler'
 
 import Login from './client/components/login'
 import GameScreen from './client/components/game-screen'
-import ARViewScreen from './client/components/AR-view-screen'
-import MapViewScreen from './client/components/map-view-screen'
 import StartScreen from './client/components/start-screen'
 import SignUp from './client/components/signup'
 import HuntScreen from './client/components/hunts'
@@ -34,8 +32,6 @@ const AppNavigator = createStackNavigator(
     StartScreen: StartScreen,
     HuntScreen: HuntScreen,
     GameScreen: GameScreen,
-    ARViewScreen: ARViewScreen,
-    MapViewScreen: MapViewScreen,
     InstructionScreen: InstructionScreen
   },
   {
