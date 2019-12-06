@@ -17,7 +17,7 @@ const Instructions = () => {
           After you start a new game, select which scavenger hunt theme you would like.
           {'\n'}{'\n'}Locations with riddles to follow will be preloaded for you to find.
           {'\n'}{'\n'}Switch between AR View and Map View to help you track down the next location.
-          {'\n'}{'\n'}When you walk towards each location, a treasure chest will pop up. Once you're close enough, click on the treasure chest to get your points!
+          {'\n'}{'\n'}When you walk towards each location, a treasure chest will pop up. Once you're close enough, the treasure chest will glow, click on the treasure chest to get your points!
           {'\n'}{'\n'}Find all the locations to win the scavenger hunt!
         </Text>
       </View>
