@@ -19,7 +19,7 @@ class Hunts extends React.Component {
     await this.props.fetchDroppingHuntLocations(this.props.user.id)
     //Post to create hunts and put on state
     await this.props.fetchCreatedHuntLocations(this.props.user.id, huntId)
-    this.props.navigate('MapScreen')
+    this.props.navigate('GameScreen')
   }
   //------------------------------------------------------------------
   render() {

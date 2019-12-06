@@ -3,9 +3,7 @@ import {
   View,
   Button,
   Text,
-  PermissionsAndroid,
-  TouchableHighlight,
-  Image
+  PermissionsAndroid
 } from 'react-native'
 import {connect} from 'react-redux'
 import Geolocation from 'react-native-geolocation-service'
@@ -17,19 +15,20 @@ import {
 } from '../store/huntLocations'
 import {coordDist} from '../../coordinate-logic'
 import {styles} from '../styles'
+import ARViewScreen from './AR-view-screen'
+import MapViewScreen from './map-view-screen'
 //------------------------------------------------------------------
 //classifies if component is currently mounted
 let mounted = true
 //determines default zoom for map
 const LATITUDE_DELTA = 0.00922
 const LONGITUDE_DELTA = 0.00421
-//sets minimum distance user needs to be from hunt location marker
-let minDist = 500
-//VIRO
-import {ViroARSceneNavigator} from 'react-viro'
-import InitialARScene from './AR-screen'
+
+let minSeeDist = 100 //sets minimum distance user needs to be from hunt location marker to see it
+let minFindDist = 50 //min distance to select hunt location marker
+
 //------------------------------------------------------------------
-class MapScreen extends Component {
+class GameScreen extends Component {
   //------------------------------------------------------------------
   static navigationOptions = {
     headerLeft: null
@@ -43,12 +42,15 @@ class MapScreen extends Component {
       longitudeDelta: LONGITUDE_DELTA,
       level: 0,
       score: 0,
-      won: false
+      won: false,
+      gameview: 'AR'
     }
     this.handleFound = this.handleFound.bind(this)
     this.updatePosition = this.updatePosition.bind(this)
     this.backToStart = this.backToStart.bind(this)
     this.requestLocationPermission = this.requestLocationPermission.bind(this)
+    this.switchToAR = this.switchToAR.bind(this)
+    this.switchToMap = this.switchToMap.bind(this)
   }
   //----------------FUNCTIONS--------------------------------------
   async componentDidMount() {
@@ -76,7 +78,7 @@ class MapScreen extends Component {
         this.state.longitude,
         targetLat,
         targetLong
-      ) < minDist
+      ) < minFindDist
     let levelsToComplete = this.props.huntLocations.length - this.state.level
 
     //conditional logic
@@ -146,6 +148,13 @@ class MapScreen extends Component {
     )
   }
   //------------------------------------------------------------------
+  switchToMap() {
+    this.setState({gameview: 'MAP'})
+  }
+  switchToAR() {
+    this.setState({gameview: 'AR'})
+  }
+  //------------------------------------------------------------------
   backToStart() {
     this.props.navigate('StartScreen')
   }
@@ -161,11 +170,13 @@ class MapScreen extends Component {
       latitude: this.state.latitude,
       longitude: this.state.longitude
     }
+    let region = this.state
     let level = this.state.level
     let huntMarker = this.props.huntLocations[level]
     return (
       <View style={{flex: 1}}>
-        <ViroARSceneNavigator initialScene={{scene: InitialARScene}} />
+        {/* Load in AR or Map View */}
+        {this.state.gameview === 'AR' ? <ARViewScreen huntMarker={huntMarker} userLoc={userLoc} minSeeDist={minSeeDist} minFindDist={minFindDist} handleFound={this.handleFound} switchToMap={this.switchToMap} /> : <MapViewScreen huntMarker={huntMarker} userLoc={userLoc} minSeeDist={minSeeDist} minFindDist={minFindDist} region={region} handleFound={this.handleFound} switchToAR={this.switchToAR} />}
         {/* Score block based on level */}
         {huntMarkers[0] && (
           <View style={styles.scoreBlock}>
@@ -175,41 +186,20 @@ class MapScreen extends Component {
             </Text>
           </View>
         )}
-        {!huntMarker ||
-        coordDist(
-          userLoc.latitude,
-          userLoc.longitude,
-          parseFloat(huntMarker.latitude),
-          parseFloat(huntMarker.longitude)
-        ) > minDist ? null : (
-          <View style={styles.treasureImageView}>
-            <TouchableHighlight
-              onPress={() =>
-                this.handleFound(
-                  parseFloat(huntMarker.latitude),
-                  parseFloat(huntMarker.longitude)
-                )
-              }
-            >
-              <Image
-                source={{
-                  uri:
-                    'http://www.i2clipart.com/cliparts/3/9/a/2/clipart-treasure-chest-39a2.png'
-                }}
-                style={styles.huntLocMarker}
-              />
-            </TouchableHighlight>
-          </View>
-        )}
         {this.state.won && (
           <View style={styles.winMessage}>
             <Text style={styles.redBoxText}>YOU WIN!!!!!!!!!</Text>
           </View>
         )}
+        {/* Riddle Window */}
         {huntMarkers[0] && (
           <View style={styles.riddleWindow}>
-            <Text>{huntMarkers[level].riddle}</Text>
-            {/* Back Button Selection */}
+            <Text style={styles.riddleText}>
+              Riddle:{'\n'}
+              {huntMarkers[level].riddle}
+              {'\n'}
+            </Text>
+            {/* Back Button */}
             {this.locationTracking ? (
               <View>
                 <Button
@@ -245,4 +235,4 @@ const mapDispatchToProps = dispatch => {
 }
 //------------------------------------------------------------------
 
-export default connect(mapStateToProps, mapDispatchToProps)(MapScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(GameScreen)

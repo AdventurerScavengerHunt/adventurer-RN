@@ -1,7 +1,7 @@
 import {Dimensions, StyleSheet} from 'react-native'
 
 export const styles = StyleSheet.create({
-  // MAP SCREEN STYLES
+  // AR/MAP SCREEN STYLES
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -20,9 +20,27 @@ export const styles = StyleSheet.create({
     padding: 3,
     borderRadius: 100
   },
-  huntLocMarker: {
+  huntLocMarkerAR: {
     height: 120,
     width: 120
+  },
+  huntLocMarkerARFound: {
+    height: 120,
+    width: 120,
+    backgroundColor: 'goldenrod',
+    borderRadius: 20,
+    padding: 2
+  },
+  huntLocMarkerMap: {
+    height: 20,
+    width: 20
+  },
+  huntLocMarkerMapFound: {
+    height: 20,
+    width: 20,
+    backgroundColor: 'goldenrod',
+    borderRadius: 20,
+    padding: 2
   },
   treasureImageView: {
     top: Dimensions.get('window').height / 3,
@@ -37,6 +55,11 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     top: Dimensions.get('window').height / 20,
     left: Dimensions.get('window').height / 20
+  },
+  switchView: {
+    position: 'absolute',
+    top: Dimensions.get('window').height / 20,
+    right: Dimensions.get('window').height / 20
   },
   redBoxText: {
     color: 'goldenrod',
@@ -55,14 +78,18 @@ export const styles = StyleSheet.create({
   },
   riddleWindow: {
     position: 'absolute',
-    top: Dimensions.get('window').height / 1.5,
-    left: Dimensions.get('window').width / 4,
+    top: Dimensions.get('window').height / 1.45,
+    left: Dimensions.get('window').width / 7.25,
+    width: Dimensions.get('window').width / 1.3,
     alignItems: 'center',
     backgroundColor: 'rgb(153, 204, 255)',
     borderColor: 'rgb(0, 102, 255)',
     padding: 10,
     borderWidth: 2,
     borderRadius: 20
+  },
+  riddleText: {
+    textAlign: 'center'
   },
   winMessage: {
     backgroundColor: 'rgba(165, 42, 42, 0.7)',
@@ -81,6 +108,11 @@ export const styles = StyleSheet.create({
     margin: 7
   },
   buttonRow: {flexDirection: 'row', justifyContent: 'space-evenly'},
+  signUpText: {
+    color: 'gray',
+    textAlign: 'center',
+    textAlignVertical: 'center'
+  },
   //HEADER STYLES
   header: {
     fontSize: 27,
