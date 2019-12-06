@@ -20,11 +20,8 @@ import MapViewScreen from './map-view-screen'
 //------------------------------------------------------------------
 //classifies if component is currently mounted
 let mounted = true
-//determines default zoom for map
-const LATITUDE_DELTA = 0.00922
-const LONGITUDE_DELTA = 0.00421
 
-let minSeeDist = 100 //sets minimum distance user needs to be from hunt location marker to see it
+let minSeeDist = 200 //sets minimum distance user needs to be from hunt location marker to see it
 let minFindDist = 50 //min distance to select hunt location marker
 
 //------------------------------------------------------------------
@@ -38,8 +35,10 @@ class GameScreen extends Component {
     this.state = {
       latitude: 0,
       longitude: 0,
-      latitudeDelta: LATITUDE_DELTA,
-      longitudeDelta: LONGITUDE_DELTA,
+      mapLatitude: 0,
+      mapLongitude: 0,
+      latitudeDelta: 0.00922, // deltas set default zoom for map
+      longitudeDelta: 0.00421,
       level: 0,
       score: 0,
       won: false,
@@ -49,6 +48,7 @@ class GameScreen extends Component {
     this.updatePosition = this.updatePosition.bind(this)
     this.backToStart = this.backToStart.bind(this)
     this.requestLocationPermission = this.requestLocationPermission.bind(this)
+    this.updateMapPosition = this.updateMapPosition.bind(this)
     this.switchToAR = this.switchToAR.bind(this)
     this.switchToMap = this.switchToMap.bind(this)
   }
@@ -138,6 +138,12 @@ class GameScreen extends Component {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
           })
+          if (this.state.mapLatitude === 0 && this.state.mapLongitude === 0) {
+            this.setState({
+              mapLatitude: position.coords.latitude,
+              mapLongitude: position.coords.longitude
+            })
+          }
         }
       },
       error => {
@@ -146,6 +152,10 @@ class GameScreen extends Component {
       },
       {enableHighAccuracy: true, timeout: 2000, maximumAge: 0}
     )
+  }
+  //------------------------------------------------------------------
+  updateMapPosition(mapLatitude, mapLongitude, latitudeDelta, longitudeDelta) {
+    this.setState({mapLatitude, mapLongitude, latitudeDelta, longitudeDelta})
   }
   //------------------------------------------------------------------
   switchToMap() {
@@ -170,13 +180,13 @@ class GameScreen extends Component {
       latitude: this.state.latitude,
       longitude: this.state.longitude
     }
-    let region = this.state
+    let region = {latitude: this.state.mapLatitude, longitude: this.state.mapLongitude, latitudeDelta: this.state.latitudeDelta, longitudeDelta: this.state.longitudeDelta}
     let level = this.state.level
     let huntMarker = this.props.huntLocations[level]
     return (
       <View style={{flex: 1}}>
         {/* Load in AR or Map View */}
-        {this.state.gameview === 'AR' ? <ARViewScreen huntMarker={huntMarker} userLoc={userLoc} minSeeDist={minSeeDist} minFindDist={minFindDist} handleFound={this.handleFound} switchToMap={this.switchToMap} /> : <MapViewScreen huntMarker={huntMarker} userLoc={userLoc} minSeeDist={minSeeDist} minFindDist={minFindDist} region={region} handleFound={this.handleFound} switchToAR={this.switchToAR} />}
+        {this.state.gameview === 'AR' ? <ARViewScreen huntMarker={huntMarker} userLoc={userLoc} minSeeDist={minSeeDist} minFindDist={minFindDist} handleFound={this.handleFound} switchToMap={this.switchToMap} /> : <MapViewScreen huntMarker={huntMarker} userLoc={userLoc} minSeeDist={minSeeDist} minFindDist={minFindDist} region={region} updateMapPosition={this.updateMapPosition} handleFound={this.handleFound} switchToAR={this.switchToAR} />}
         {/* Score block based on level */}
         {huntMarkers[0] && (
           <View style={styles.scoreBlock}>
