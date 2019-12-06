@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Button, SafeAreaView, Image} from 'react-native'
+import {View, Button, Image} from 'react-native'
 import MapView, {Marker} from 'react-native-maps'
 //------------------------------------------------------------------
 import {coordDist} from '../../coordinate-logic'
@@ -20,10 +20,13 @@ const MapViewScreen = props => {
     )
   }
 
+  let onRegionChangeComplete = (region) => {
+    props.updateMapPosition(region.latitude, region.longitude, region.latitudeDelta, region.longitudeDelta)
+  }
   return (
     <View style={{flex: 1}}>
       <View style={{flex: 1}}>
-        <MapView style={styles.mapStyle} region={props.region}>
+        <MapView style={styles.mapStyle} region={props.region} onRegionChangeComplete={onRegionChangeComplete}>
           {/* Current user location marker */}
           <Marker coordinate={userLoc}>
             <View style={styles.userLocMarker} />
