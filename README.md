@@ -8,7 +8,7 @@ AdventurAR is an augmented reality scavenger hunt experience available on Androi
 
 You can start a new game and choose the scavenger hunt that best fits the area they want to explore. Check out the riddle at the bottom of the game screen to figure out where you need to go to get your point! You can toggle between the AR camera view and map view to help you figure out where to go. If you see a treasure chest appear before your eyes, you're almost there! Once the chest glows, tap it to get that point. Collect them all to win!
 
-<img src="https://imgur.com/36be7c30-bf22-4b9c-84dd-3ddc20ea32fa" height=500>
+<img src="https://i.imgur.com/HSNwjam.png" height=500>
 
 ## How did we build it?
 
