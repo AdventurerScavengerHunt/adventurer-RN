@@ -20,13 +20,22 @@ const MapViewScreen = props => {
     )
   }
 
-  let onRegionChangeComplete = (region) => {
-    props.updateMapPosition(region.latitude, region.longitude, region.latitudeDelta, region.longitudeDelta)
+  let onRegionChangeComplete = region => {
+    props.updateMapPosition(
+      region.latitude,
+      region.longitude,
+      region.latitudeDelta,
+      region.longitudeDelta
+    )
   }
   return (
     <View style={{flex: 1}}>
       <View style={{flex: 1}}>
-        <MapView style={styles.mapStyle} region={props.region} onRegionChangeComplete={onRegionChangeComplete}>
+        <MapView
+          style={styles.mapStyle}
+          region={props.region}
+          onRegionChangeComplete={onRegionChangeComplete}
+        >
           {/* Current user location marker */}
           <Marker coordinate={userLoc}>
             <View style={styles.userLocMarker} />
@@ -57,7 +66,11 @@ const MapViewScreen = props => {
                   uri:
                     'http://www.i2clipart.com/cliparts/3/9/a/2/clipart-treasure-chest-39a2.png'
                 }}
-                style={[distanceToHuntMarker <= minFindDist ? styles.huntLocMarkerMapFound : styles.huntLocMarkerMap]}
+                style={[
+                  distanceToHuntMarker <= minFindDist
+                    ? styles.huntLocMarkerMapFound
+                    : styles.huntLocMarkerMap
+                ]}
               />
             </Marker>
           )}
