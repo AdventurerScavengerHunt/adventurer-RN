@@ -29,4 +29,4 @@ To start the game, plug your Android into your computer and run the following co
 
 `react-native run-android`
 
-Once the game is on your phone, you can get outside and get to scavengering!
+Once the game is on your phone, you can get outside and get to "scavenger"-ing!
