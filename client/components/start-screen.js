@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Button, ImageBackground} from 'react-native'
+import {View, Button} from 'react-native'
 import {connect} from 'react-redux'
 import {me} from '../store/user'
 import {withNavigationFocus} from 'react-navigation'
@@ -55,13 +55,7 @@ class StartScreen extends React.Component {
   //------------------------------------------------------------------
   render() {
     return (
-      <ImageBackground
-        source={{
-          uri:
-            'https://cdn.vox-cdn.com/thumbor/JrouYZWSJNcepH5ZAhzVdUA7Muw=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/63616039/171109_08_11_37_5DS_0545.0.jpg'
-        }}
-        style={{width: '100%', height: '100%'}}
-      >
+      <View style={styles.screenView}>
         <View>
           <Button
             title="GAME INSTRUCTIONS"
@@ -83,7 +77,7 @@ class StartScreen extends React.Component {
             onPress={() => this.handleSelection(RESUME_GAME)}
           />
         </View>
-      </ImageBackground>
+      </View>
     )
   }
 }
