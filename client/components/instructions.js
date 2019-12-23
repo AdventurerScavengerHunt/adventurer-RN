@@ -10,7 +10,7 @@ const Instructions = () => {
         After you start a new game, select which scavenger hunt theme you would
         like.
         {'\n'}
-        {'\n'}Locations with riddles to follow will be preloaded for you to
+        {'\n'}Locations with clues to follow will be preloaded for you to
         find.
         {'\n'}
         {'\n'}Switch between AR View and Map View to help you track down the

@@ -221,12 +221,12 @@ class GameScreen extends Component {
             <Text style={styles.redBoxText}>YOU WIN!!!!!!!!!</Text>
           </View>
         )}
-        {/* Riddle Window */}
+        {/* Clue Window */}
         {huntMarkers[0] && (
-          <View style={styles.riddleWindow}>
-            <Text style={styles.riddleText}>
-              RIDDLE{'\n'}
-              {huntMarkers[level].riddle}
+          <View style={styles.clueWindow}>
+            <Text style={styles.clueText}>
+              CLUE{'\n'}
+              {huntMarkers[level].clue}
               {'\n'}
             </Text>
             {/* Back Button */}

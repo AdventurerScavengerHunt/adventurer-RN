@@ -142,7 +142,7 @@ export const styles = StyleSheet.create({
     color: 'goldenrod',
     fontSize: 20
   },
-  riddleWindow: {
+  clueWindow: {
     position: 'absolute',
     top: Dimensions.get('window').height / 1.45,
     left: Dimensions.get('window').width / 7.25,
@@ -155,7 +155,7 @@ export const styles = StyleSheet.create({
     borderStyle: 'dashed',
     color: 'black'
   },
-  riddleText: {
+  clueText: {
     textAlign: 'center',
     color: 'black'
   },
