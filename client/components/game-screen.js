@@ -1,10 +1,5 @@
 import React, {Component} from 'react'
-import {
-  View,
-  Button,
-  Text,
-  PermissionsAndroid
-} from 'react-native'
+import {View, Text, TouchableOpacity, PermissionsAndroid} from 'react-native'
 import {connect} from 'react-redux'
 import Geolocation from 'react-native-geolocation-service'
 //------------------------------------------------------------------
@@ -180,13 +175,38 @@ class GameScreen extends Component {
       latitude: this.state.latitude,
       longitude: this.state.longitude
     }
-    let region = {latitude: this.state.mapLatitude, longitude: this.state.mapLongitude, latitudeDelta: this.state.latitudeDelta, longitudeDelta: this.state.longitudeDelta}
+    let region = {
+      latitude: this.state.mapLatitude,
+      longitude: this.state.mapLongitude,
+      latitudeDelta: this.state.latitudeDelta,
+      longitudeDelta: this.state.longitudeDelta
+    }
     let level = this.state.level
     let huntMarker = this.props.huntLocations[level]
     return (
       <View style={{flex: 1}}>
         {/* Load in AR or Map View */}
-        {this.state.gameview === 'AR' ? <ARViewScreen huntMarker={huntMarker} userLoc={userLoc} minSeeDist={minSeeDist} minFindDist={minFindDist} handleFound={this.handleFound} switchToMap={this.switchToMap} /> : <MapViewScreen huntMarker={huntMarker} userLoc={userLoc} minSeeDist={minSeeDist} minFindDist={minFindDist} region={region} updateMapPosition={this.updateMapPosition} handleFound={this.handleFound} switchToAR={this.switchToAR} />}
+        {this.state.gameview === 'AR' ? (
+          <ARViewScreen
+            huntMarker={huntMarker}
+            userLoc={userLoc}
+            minSeeDist={minSeeDist}
+            minFindDist={minFindDist}
+            handleFound={this.handleFound}
+            switchToMap={this.switchToMap}
+          />
+        ) : (
+          <MapViewScreen
+            huntMarker={huntMarker}
+            userLoc={userLoc}
+            minSeeDist={minSeeDist}
+            minFindDist={minFindDist}
+            region={region}
+            updateMapPosition={this.updateMapPosition}
+            handleFound={this.handleFound}
+            switchToAR={this.switchToAR}
+          />
+        )}
         {/* Score block based on level */}
         {huntMarkers[0] && (
           <View style={styles.scoreBlock}>
@@ -205,17 +225,19 @@ class GameScreen extends Component {
         {huntMarkers[0] && (
           <View style={styles.riddleWindow}>
             <Text style={styles.riddleText}>
-              Riddle:{'\n'}
+              RIDDLE{'\n'}
               {huntMarkers[level].riddle}
               {'\n'}
             </Text>
             {/* Back Button */}
             {this.locationTracking ? (
-              <View>
-                <Button
-                  title="BACK TO START SCREEN"
+              <View style={styles.buttonColumn}>
+                <TouchableOpacity
+                  style={[styles.buttonStyle, styles.secondaryButton]}
                   onPress={() => this.backToStart()}
-                />
+                >
+                  <Text style={styles.buttonText}>BACK TO START SCREEN</Text>
+                </TouchableOpacity>
               </View>
             ) : (
               <Text>Loading...</Text>

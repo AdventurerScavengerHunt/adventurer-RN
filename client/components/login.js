@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-  Text,
-  TextInput,
-  View,
-  Button,
-} from 'react-native'
+import {Text, TextInput, View, TouchableOpacity} from 'react-native'
 import {connect} from 'react-redux'
 //------------------------------------------------------------------
 import {auth} from '../store/user'
@@ -25,6 +20,9 @@ class Login extends React.Component {
   }
   //------------------------------------------------------------------
   async submitLogin() {
+    this.setState({
+      error: false
+    })
     await this.props.login(this.state.email, this.state.password, LOGIN)
     if (this.props.user.id) {
       this.props.navigate('StartScreen')
@@ -63,8 +61,18 @@ class Login extends React.Component {
             {this.state.error ? 'Incorrect email or password' : ''}
           </Text>
           <View style={styles.buttonColumn}>
-            <Text style={[styles.buttonStyle, styles.loginButton]} onPress={this.submitLogin}>LOGIN</Text>
-            <Text style={[styles.buttonStyle, styles.signUpButton]} onPress={this.signUp}>SIGN UP</Text>
+            <TouchableOpacity
+              style={[styles.buttonStyle, styles.primaryButton]}
+              onPress={() => this.submitLogin()}
+            >
+              <Text style={styles.buttonText}>LOGIN</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.buttonStyle, styles.secondaryButton]}
+              onPress={() => this.signUp()}
+            >
+              <Text style={styles.buttonText}>SIGN UP</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>

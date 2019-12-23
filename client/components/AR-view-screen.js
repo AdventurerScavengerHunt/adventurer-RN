@@ -1,5 +1,11 @@
 import React from 'react'
-import {View, Button, TouchableHighlight, Image} from 'react-native'
+import {
+  View,
+  Text,
+  TouchableHighlight,
+  Image,
+  TouchableOpacity
+} from 'react-native'
 //------------------------------------------------------------------
 import {coordDist} from '../../coordinate-logic'
 import {styles} from '../styles'
@@ -53,7 +59,12 @@ const ARViewScreen = props => {
       )}
       {/* Switch View Button */}
       <View style={styles.switchView}>
-        <Button title="MAP" onPress={() => props.switchToMap()} />
+        <TouchableOpacity
+          style={[styles.buttonStyle, styles.primaryButton]}
+          onPress={() => props.switchToMap()}
+        >
+          <Text style={styles.buttonText}>MAP</Text>
+        </TouchableOpacity>
       </View>
     </View>
   )

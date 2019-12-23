@@ -9,25 +9,34 @@ export const styles = StyleSheet.create({
   },
   screenView: {
     top: 50,
-    marginHorizontal: 16,
+    marginHorizontal: 16
+  },
+  startScreenView: {
+    flex: 1,
+    justifyContent: 'center',
+    marginHorizontal: 16
   },
   // HEADER STYLES
   loginHeader: {
+    alignSelf: 'center',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    marginBottom: 36,
+    fontFamily: 'roboto',
     fontSize: 48,
     fontWeight: 'bold',
-    alignSelf: 'center',
-    marginBottom: 30,
-    fontFamily: 'roboto',
     color: 'rgb(165, 42, 42)',
     textShadowColor: 'black',
     textShadowRadius: 2
   },
   header: {
-    marginBottom: 30,
+    alignSelf: 'center',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    marginBottom: 36,
+    fontFamily: 'roboto',
     fontSize: 34,
     fontWeight: 'bold',
-    alignSelf: 'center',
-    fontFamily: 'monospace',
     color: 'rgb(165, 42, 42)',
     textShadowColor: 'black',
     textShadowRadius: 2
@@ -38,15 +47,62 @@ export const styles = StyleSheet.create({
   },
   formInput: {
     margin: 2,
-    backgroundColor: '#FAFAFA',
-    borderColor: '#E65100',
-    borderWidth: 2,
+    backgroundColor: '#FFCC80',
     borderRadius: 10,
     fontSize: 16
   },
   errorMessageText: {
     margin: 7,
     color: 'red'
+  },
+  // TEXT BUTTON STYLES (due to v. 0.59.9 button limitations)
+  buttonStyle: {
+    margin: 8,
+    borderRadius: 10,
+    justifyContent: 'center',
+    width: '100%',
+    height: 42
+  },
+  startScreenButtonStyle: {
+    margin: 8,
+    borderRadius: 10,
+    justifyContent: 'center',
+    width: '100%',
+    height: 84
+  },
+  buttonText: {
+    color: 'white',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    fontWeight: 'bold'
+  },
+  startScreenButtonText: {
+    fontSize: 24
+  },
+  tertiaryButtonText: {
+    color: 'white',
+    textShadowColor: '#E65100',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 5,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    fontWeight: 'bold'
+  },
+  primaryButton: {
+    backgroundColor: 'rgb(165, 42, 42)'
+  },
+  secondaryButton: {
+    backgroundColor: '#E65100'
+  },
+  tertiaryButton: {
+    backgroundColor: '#FF9800',
+    borderColor: '#E65100',
+    borderWidth: 2,
+    borderRadius: 10,
+    borderStyle: 'dashed'
+  },
+  disabledButton: {
+    backgroundColor: '#E0E0E0'
   },
   // LOGIN SCREEN STYLES
   loginScreenView: {
@@ -57,32 +113,10 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center'
   },
-  buttonStyle: {
-    margin: 8,
-    color: 'white',
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    borderRadius: 10
-  },
-  loginButton: {
-    backgroundColor: 'rgb(165, 42, 42)',
-    width: 72,
-    height: 42,
-  },
-  signUpButton: {
-    backgroundColor: '#E65100',
-    width: 72,
-    height: 42
-  },
-  createAccountButton: {
-    backgroundColor: 'rgb(165, 42, 42)',
-    width: 186,
-    height: 42
-  },
   // INSTRUCTIONS SCREEN STYLES
   textWindow: {
     padding: 16,
-    backgroundColor: '#FAFAFA',
+    backgroundColor: '#FFCC80',
     borderColor: '#E65100',
     borderWidth: 2,
     borderRadius: 10,
@@ -113,15 +147,17 @@ export const styles = StyleSheet.create({
     top: Dimensions.get('window').height / 1.45,
     left: Dimensions.get('window').width / 7.25,
     width: Dimensions.get('window').width / 1.3,
-    alignItems: 'center',
-    backgroundColor: 'rgb(153, 204, 255)',
-    borderColor: 'rgb(0, 102, 255)',
-    padding: 10,
+    padding: 16,
+    backgroundColor: '#FFCC80',
+    borderColor: '#E65100',
     borderWidth: 2,
-    borderRadius: 10
+    borderRadius: 10,
+    borderStyle: 'dashed',
+    color: 'black'
   },
   riddleText: {
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'black'
   },
   winMessage: {
     backgroundColor: 'rgba(165, 42, 42, 0.7)',

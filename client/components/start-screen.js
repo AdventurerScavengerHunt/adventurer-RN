@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Button} from 'react-native'
+import {View, Text, TouchableOpacity, Button} from 'react-native'
 import {connect} from 'react-redux'
 import {me} from '../store/user'
 import {withNavigationFocus} from 'react-navigation'
@@ -47,7 +47,9 @@ class StartScreen extends React.Component {
     if (inSelection === NEW_GAME) {
       this.props.navigate('HuntScreen')
     } else if (inSelection === RESUME_GAME) {
-      this.props.navigate('GameScreen')
+      if (!this.state.hasNoPreviousGame) {
+        this.props.navigate('GameScreen')
+      }
     } else if (inSelection === GAME_INSTRUCTIONS) {
       this.props.navigate('InstructionScreen')
     }
@@ -55,27 +57,30 @@ class StartScreen extends React.Component {
   //------------------------------------------------------------------
   render() {
     return (
-      <View style={styles.screenView}>
-        <View>
-          <Button
-            title="GAME INSTRUCTIONS"
+      <View style={styles.startScreenView}>
+        <View style={styles.buttonColumn}>
+          <TouchableOpacity
+            style={[styles.startScreenButtonStyle, styles.tertiaryButton]}
             onPress={() => this.handleSelection(GAME_INSTRUCTIONS)}
-          />
-        </View>
-        <View>
-          <Button
-            color="#add8e6"
-            title="NEW GAME"
+          >
+            <Text style={[styles.buttonText, styles.startScreenButtonText]}>GAME INSTRUCTIONS</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.startScreenButtonStyle, styles.primaryButton]}
             onPress={() => this.handleSelection(NEW_GAME)}
-          />
-        </View>
-        <View>
-          <Button
-            color="#add8e6"
-            disabled={this.state.hasNoPreviousGame}
-            title="RESUME"
+          >
+            <Text style={[styles.buttonText, styles.startScreenButtonText]}>NEW GAME</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={
+              !this.state.hasNoPreviousGame
+                ? [styles.startScreenButtonStyle, styles.secondaryButton]
+                : [styles.startScreenButtonStyle, styles.disabledButton]
+            }
             onPress={() => this.handleSelection(RESUME_GAME)}
-          />
+          >
+            <Text style={[styles.buttonText, styles.startScreenButtonText]}>RESUME</Text>
+          </TouchableOpacity>
         </View>
       </View>
     )

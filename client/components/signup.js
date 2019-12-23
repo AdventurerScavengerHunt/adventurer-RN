@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, TextInput, View, Button} from 'react-native'
+import {Text, TextInput, View, TouchableOpacity} from 'react-native'
 import {connect} from 'react-redux'
 import {auth} from '../store/user'
 import {styles} from '../styles'
@@ -97,12 +97,12 @@ class SignUp extends React.Component {
             <Text />
           )}
           <View style={styles.buttonColumn}>
-            <Text
-              style={[styles.buttonStyle, styles.createAccountButton]}
-              onPress={this.createAccount}
+            <TouchableOpacity
+              style={[styles.buttonStyle, styles.primaryButton]}
+              onPress={() => this.createAccount()}
             >
-              CREATE ACCOUNT
-            </Text>
+              <Text style={styles.buttonText}>CREATE ACCOUNT</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>

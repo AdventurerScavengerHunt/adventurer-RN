@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, View, Button} from 'react-native'
+import {Text, View, ScrollView, TouchableOpacity} from 'react-native'
 import {connect} from 'react-redux'
 //------------------------------------------------------------------
 import {fetchAllHunts} from '../store/hunts'
@@ -27,14 +27,19 @@ class Hunts extends React.Component {
     return (
       <View style={styles.screenView}>
         <Text style={styles.header}>Choose A Scavenger Hunt:</Text>
-        {hunts.map(hunt => (
-          <View key={hunt.id}>
-            <Button
-              title={hunt.name}
-              onPress={() => this.handleSelectedHunt(hunt.id)}
-            />
+        <ScrollView>
+          <View style={styles.buttonColumn}>
+            {hunts.map(hunt => (
+              <TouchableOpacity
+                key={hunt.id}
+                style={[styles.buttonStyle, styles.secondaryButton]}
+                onPress={() => this.handleSelectedHunt(hunt.id)}
+              >
+                <Text style={styles.buttonText}>{hunt.name}</Text>
+              </TouchableOpacity>
+            ))}
           </View>
-        ))}
+        </ScrollView>
       </View>
     )
   }
