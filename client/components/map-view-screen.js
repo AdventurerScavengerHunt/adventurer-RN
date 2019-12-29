@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Button, Image} from 'react-native'
+import {View, Text, Image, TouchableOpacity} from 'react-native'
 import MapView, {Marker} from 'react-native-maps'
 //------------------------------------------------------------------
 import {coordDist} from '../../coordinate-logic'
@@ -78,7 +78,12 @@ const MapViewScreen = props => {
       </View>
       {/* Switch View Button */}
       <View style={styles.switchView}>
-        <Button title="AR" onPress={() => props.switchToAR()} />
+        <TouchableOpacity
+          style={[styles.buttonStyle, styles.primaryButton]}
+          onPress={() => props.switchToAR()}
+        >
+          <Text style={styles.buttonText}>AR</Text>
+        </TouchableOpacity>
       </View>
     </View>
   )

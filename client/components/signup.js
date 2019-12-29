@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, TextInput, View, Button, ImageBackground} from 'react-native'
+import {Text, TextInput, View, TouchableOpacity} from 'react-native'
 import {connect} from 'react-redux'
 import {auth} from '../store/user'
 import {styles} from '../styles'
@@ -56,13 +56,7 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <ImageBackground
-        source={{
-          uri:
-            'https://cdn.vox-cdn.com/thumbor/JrouYZWSJNcepH5ZAhzVdUA7Muw=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/63616039/171109_08_11_37_5DS_0545.0.jpg'
-        }}
-        style={{width: '100%', height: '100%'}}
-      >
+      <View style={styles.screenView}>
         <Text style={styles.header}>SIGNUP</Text>
         <View style={styles.form}>
           <TextInput
@@ -95,7 +89,6 @@ class SignUp extends React.Component {
             autoCapitalize="none"
             style={styles.formInput}
           />
-          <View style={styles.aboveError} />
           {this.state.errorMessage ? (
             <Text style={styles.errorMessageText}>
               {this.state.errorMessage}
@@ -103,9 +96,16 @@ class SignUp extends React.Component {
           ) : (
             <Text />
           )}
-          <Button title="Create Account" onPress={this.createAccount} />
+          <View style={styles.buttonColumn}>
+            <TouchableOpacity
+              style={[styles.buttonStyle, styles.primaryButton]}
+              onPress={() => this.createAccount()}
+            >
+              <Text style={styles.buttonText}>CREATE ACCOUNT</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </ImageBackground>
+      </View>
     )
   }
 }

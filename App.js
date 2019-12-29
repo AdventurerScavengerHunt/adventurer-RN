@@ -35,7 +35,15 @@ const AppNavigator = createStackNavigator(
     InstructionScreen: InstructionScreen
   },
   {
-    initialRouteName: 'Login'
+    initialRouteName: 'Login',
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#E65100',
+      }
+    },
+    cardStyle: {
+      backgroundColor: '#FFF3E0'
+    }
   }
 )
 

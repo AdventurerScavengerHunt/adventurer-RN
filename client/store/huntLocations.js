@@ -15,7 +15,7 @@ const huntLocations = [
     id: null,
     latitude: 0,
     longitude: 0,
-    riddle: '',
+    clue: '',
     huntLocation: { visited: false },
   },
 ];
